@@ -43,7 +43,7 @@ void pint(stack_t **stack, unsigned int line_number)
 */
 void swap(stack_t **stack, unsigned int line_number)
 {
-	stack_t *ref_to_head = *stack, *next_node;
+	stack_t *second;
 
 	if (*stack == NULL || (*stack)->next == NULL)
 	{
@@ -51,12 +51,18 @@ void swap(stack_t **stack, unsigned int line_number)
 		free_stack(stack);
 		exit(EXIT_FAILURE);
 	}
-	(*stack) = (*stack)->next;
-	next_node = (*stack)->next;
-	(*stack)->prev = NULL;
-	(*stack)->next = ref_to_head;
-	ref_to_head->prev = (*stack);
-	ref_to_head->next = next_node;
+	second = (*stack)->next;
+	second->prev = NULL;
+	if (second->next)
+	{
+		second->next->prev = (*stack);
+		(*stack)->next = second->next;
+	}
+	else
+		(*stack)->next = NULL;
+	second->next = (*stack);
+	second->prev = NULL;
+	(*stack) = second;
 }
 /**
  * nop - implementation of monty nop
