@@ -24,15 +24,19 @@ void free_stack(stack_t **head)
  * @arr_2D: 2d arr
  * Return: nothing
 */
-void free_2d(char **arr_2D)
+void free_2d(char ***arr_2D)
 {
 	int i;
 
-	if (arr_2D == NULL)
+	if (*arr_2D == NULL)
 		return;
-	for (i = 0; arr_2D[i] != NULL; i++)
-		free(arr_2D[i]);
-	free(arr_2D);
+	for (i = 0; (*arr_2D)[i] != NULL; i++)
+	{
+		free((*arr_2D)[i]);
+		(*arr_2D)[i] = NULL;
+	}
+	free(*arr_2D);
+	*arr_2D = NULL;
 }
 
 /**

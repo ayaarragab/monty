@@ -32,13 +32,14 @@ int main(int argc, char *argv[])
 			if (strcmp(splitted_line[0], "push") == 0)
 				call_push(&stack, info.LINE, splitted_line[1]);
 			else
-				error_instruction(&stack, info.LINE, splitted_line[0], splitted_line);
+				error_instruction(&stack, info.LINE, splitted_line[0], &splitted_line);
 		}
 		else
 			opcode(&stack, info.LINE);
+		free_2d(&splitted_line);
 	}
 	fclose(monty_file);
-	free_2d(splitted_line);
+	free_2d(&splitted_line);
 	free_stack(&stack);
 	return (0);
 }

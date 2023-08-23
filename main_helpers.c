@@ -7,7 +7,7 @@
  * @buf: buffer
  * Return: nothing
 */
-void error_instruction(stack_t **stack, int line, char *instr, char **buf)
+void error_instruction(stack_t **stack, int line, char *instr, char ***buf)
 {
 	fprintf(stderr, "L%d: unknown instruction %s\n", line, instr);
 	free_2d(buf);
