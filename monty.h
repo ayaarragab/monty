@@ -54,7 +54,6 @@ void swap(stack_t **stack, unsigned int line_number);
 void add(stack_t **stack, unsigned int line_number);
 void nop(stack_t **stack, unsigned int line_number);
 void free_2d(char **arr_2D);
-void check_malloc2(char *str);
 char *trim(char *command);
 int check_if_all_spaces(char *command);
 int is_comment(char *line);
