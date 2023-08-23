@@ -1,3 +1,4 @@
+#define _GNU_SOURCE
 #include "monty.h"
 struct info_s info = {"stack", 0};
 /**
@@ -19,7 +20,7 @@ int main(int argc, char *argv[])
 	if (argc != 2)
 		errno_argc(stack);
 	check_malloc2(buffer);
-	monty_file = fopen(argv[1], "r");
+	monty_file = fopen(filename, "r");
 	if (monty_file == NULL)
 		errno_fd(filename, stack);
 	while (fgets(buffer, 8192, monty_file) != NULL)
