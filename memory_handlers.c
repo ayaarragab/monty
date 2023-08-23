@@ -7,6 +7,7 @@
 void free_stack(stack_t **head)
 {
 	stack_t *current = *head;
+
 	if (*head == NULL)
 		return;
 
