@@ -20,6 +20,7 @@
 struct info_s
 {
 	char *mode;
+	char **splitted_line;
 	int LINE;
 };
 extern struct info_s info;

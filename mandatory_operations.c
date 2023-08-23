@@ -49,6 +49,7 @@ void swap(stack_t **stack, unsigned int line_number)
 	{
 		fprintf(stderr, "L%d: can't swap, stack too short\n", line_number);
 		free_stack(stack);
+		free_2d(&info.splitted_line);
 		exit(EXIT_FAILURE);
 	}
 	second = (*stack)->next;
