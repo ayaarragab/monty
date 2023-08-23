@@ -6,7 +6,7 @@ struct info_s info = {"stack", 0};
  * @argc: argv length
  * Return: 0 or other thing in faliure
 */
-int main(int argc, char **argv)
+int main(int argc, char *argv[])
 {
 	stack_t *stack = malloc(sizeof(stack_t));
 	char *trimmed;
