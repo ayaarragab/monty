@@ -1,5 +1,4 @@
 #include "monty.h"
-struct info_s info = {"stack", 0};
 /**
  * error_instruction - when an unknown instruction
  * @stack: stack
@@ -84,10 +83,11 @@ char **make_array_of_strings(char *command)
 int main(int argc, char **argv)
 {
 	stack_t *stack = malloc(sizeof(stack_t));
-	char *trimmed;
+	char *trimmed, *mode = "stack";
 	char buffer[BUFSIZ], **splitted_line, *filename = argv[1];
 	FILE *monty_file;
 	void (*opcode)(stack_t **, unsigned int);
+	int LINE = 0;
 
 	check_malloc(stack);
 	stack = NULL;
@@ -99,7 +99,7 @@ int main(int argc, char **argv)
 		errno_fd(filename, stack);
 	while (fgets(buffer, BUFSIZ, monty_file) != NULL)
 	{
-		info.LINE++;
+		LINE++;
 		if (buffer[0] == '\n' || !check_if_all_spaces(buffer) || is_comment(buffer))
 			continue;
 		trimmed = trim(buffer);
@@ -108,12 +108,14 @@ int main(int argc, char **argv)
 		if (opcode == NULL)
 		{
 			if (strcmp(splitted_line[0], "push") == 0)
-				call_push(&stack, info.LINE, splitted_line[1]);
+				call_push(&stack, LINE, splitted_line[1], mode);
+			else if (strcmp(splitted_line[0], "stack") == 0 || strcmp(splitted_line[0], "queue") == 0)
+				mode = switch_mode(&stack, LINE, splitted_line[0]);
 			else
-				error_instruction(stack, info.LINE, splitted_line[0], splitted_line);
+				error_instruction(stack, LINE, splitted_line[0], splitted_line);
 		}
 		else
-			opcode(&stack, info.LINE);
+			opcode(&stack, LINE);
 	}
 	fclose(monty_file);
 	free_2d(splitted_line);

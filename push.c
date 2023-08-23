@@ -57,7 +57,7 @@ void push_q(stack_t **stack, unsigned int L)
  * @num: number to push
  * Return: nothing
  */
-void call_push(stack_t **stack, unsigned int L, char *num)
+void call_push(stack_t **stack, unsigned int L, char *num, char *mode)
 {
 	stack_t *current = *stack;
 	int number;
@@ -69,7 +69,7 @@ void call_push(stack_t **stack, unsigned int L, char *num)
 		exit(EXIT_FAILURE);
 	}
 	number = atoi(num);
-	if (strcmp(info.mode, "stack") == 0)
+	if (strcmp(mode, "stack") == 0)
 	{
 		push(stack, L);
 		(*stack)->n = number;
