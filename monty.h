@@ -70,4 +70,8 @@ void divi(stack_t **stack, unsigned int line_number);
 void mod(stack_t **stack, unsigned int line_number);
 void mul(stack_t **stack, unsigned int line_number);
 void sub(stack_t **stack, unsigned int line_number);
+void error_instruction(stack_t *stack, int line, char *instr, char **buf);
+void errno_argc(stack_t *stack);
+void errno_fd(char *str, stack_t *stack);
+char **make_array_of_strings(char *command);
 #endif /* MONTY_H */
