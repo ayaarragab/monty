@@ -14,6 +14,12 @@
 #include <limits.h>
 #include <ctype.h>
 #define _POSIX_C_SOURCE 200809L
+struct info_s
+{
+	char *mode;
+	int LINE;
+};
+extern struct info_s info;
 /**
  * struct stack_s - doubly linked list representation of a stack (or queue)
  * @n: integer
@@ -43,7 +49,7 @@ typedef struct instruction_s
     void (*f)(stack_t **stack, unsigned int line_number);
 } instruction_t;
 void push(stack_t **stack, unsigned int line_number);
-void call_push(stack_t **, unsigned int line_number, char *, char *);
+void call_push(stack_t **, unsigned int line_number, char *);
 void check_malloc(stack_t *stack);
 void pall(stack_t **stack, unsigned int line_number);
 void free_stack(stack_t *head);
@@ -64,7 +70,6 @@ void rotl(stack_t **, unsigned int);
 void rotr(stack_t **, unsigned int);
 void stack(stack_t **, unsigned int);
 void queue(stack_t **, unsigned int);
-char *switch_mode(stack_t **stack, unsigned int L, char *);
 int isnum(char *);
 void divi(stack_t **stack, unsigned int line_number);
 void mod(stack_t **stack, unsigned int line_number);
