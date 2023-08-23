@@ -1,4 +1,3 @@
-#define _GNU_SOURCE
 #include "monty.h"
 struct info_s info = {"stack", 0};
 /**
