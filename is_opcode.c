@@ -18,8 +18,8 @@ void (*is_opcode(char *cmd))(stack_t **stack, unsigned int L)
 		{"pstr", pstr},
 		{"rotl", rotl},
 		{"rotr", rotr},
-		/*{"stack", stack},*/
-		/*{"queue", queue},*/
+		{"stack", stack},
+		{"queue", queue},
 		{"sub", sub},
 		{"divi", divi},
 		{"mod", mod},
@@ -27,7 +27,7 @@ void (*is_opcode(char *cmd))(stack_t **stack, unsigned int L)
 		{NULL, NULL},
 	};
 
-	for (i = 0; opcodes[i].opcode != NULL; ++i)
+	for (i = 0; opcodes[i].opcode != NULL; i++)
 	{
 		if (strcmp(cmd, opcodes[i].opcode) == 0)
 			return (opcodes[i].f);

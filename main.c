@@ -10,7 +10,7 @@ int main(int argc, char **argv)
 {
 	stack_t *stack = malloc(sizeof(stack_t));
 	char *trimmed;
-	char buffer[BUFSIZ], **splitted_line, *filename = argv[1];
+	char buffer[8192], **splitted_line, *filename = argv[1];
 	FILE *monty_file;
 	void (*opcode)(stack_t **, unsigned int);
 
@@ -22,7 +22,7 @@ int main(int argc, char **argv)
 	monty_file = fopen(argv[1], "r");
 	if (monty_file == NULL)
 		errno_fd(filename, stack);
-	while (fgets(buffer, BUFSIZ, monty_file) != NULL)
+	while (fgets(buffer, 8192, monty_file) != NULL)
 	{
 		info.LINE++;
 		if (buffer[0] == '\n' || !check_if_all_spaces(buffer) || is_comment(buffer))
