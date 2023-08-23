@@ -4,20 +4,20 @@
  * @head: head
  * Return: nothing
 */
-void free_stack(stack_t *head)
+void free_stack(stack_t **head)
 {
-	stack_t *current = head, *nextnode = NULL;
+	stack_t *current = *head;
+	if (*head == NULL)
+		return;
 
-	while (current != NULL)
+	while (current->next)
 	{
-		nextnode = current->next;
-		if (current->prev)
-			current->prev->next = nextnode;
-		if (nextnode)
-			nextnode->prev = current->prev;
-		free(current);
-		current = nextnode;
+		current = current->next;
+		free(current->prev);
+		current->prev = NULL;
 	}
+	free(current);
+	current = NULL;
 }
 /**
  * free_2d - frees a 2d array
@@ -28,6 +28,8 @@ void free_2d(char **arr_2D)
 {
 	int i;
 
+	if (arr_2D == NULL)
+		return;
 	for (i = 0; arr_2D[i] != NULL; i++)
 		free(arr_2D[i]);
 	free(arr_2D);
@@ -55,6 +57,6 @@ void check_malloc(stack_t *stack)
 	if (stack == NULL)
 	{
 		fprintf(stderr, "Error: malloc failed\n");
-		exit(EXIT_FAILURE);
+	exit(EXIT_FAILURE);
 	}
 }

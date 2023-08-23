@@ -7,7 +7,7 @@
  * @buf: buffer
  * Return: nothing
 */
-void error_instruction(stack_t *stack, int line, char *instr, char **buf)
+void error_instruction(stack_t **stack, int line, char *instr, char **buf)
 {
 	fprintf(stderr, "L%d: unknown instruction %s\n", line, instr);
 	free_2d(buf);
@@ -19,7 +19,7 @@ void error_instruction(stack_t *stack, int line, char *instr, char **buf)
  * @stack: stack
  * Return: nothing
 */
-void errno_argc(stack_t *stack)
+void errno_argc(stack_t **stack)
 {
 	fprintf(stderr, "USAGE: monty file\n");
 	free_stack(stack);
@@ -31,7 +31,7 @@ void errno_argc(stack_t *stack)
  * @stack: stack
  * Return: nothing
 */
-void errno_fd(char *str, stack_t *stack)
+void errno_fd(char *str, stack_t **stack)
 {
 	fprintf(stderr, "Error: Can't open file %s\n", str);
 	free_stack(stack);

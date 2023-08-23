@@ -46,6 +46,8 @@ int isnum(char *num)
 
 	if (num == NULL || num[0] == '\0')
 		return (0);
+	if (num[0] == '-' && strlen(num) > 1)
+		i++;
 	while (num[i] != '\0')
 	{
 		if (isdigit(num[i]) == 0)

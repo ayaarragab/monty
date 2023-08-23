@@ -15,6 +15,7 @@ void pall(stack_t **stack, unsigned int line_number)
 		printf("%d\n", current->n);
 		current = current->next;
 	}
+	fflush(NULL);
 }
 /**
  * pint - implementation of monty pint
@@ -29,7 +30,7 @@ void pint(stack_t **stack, unsigned int line_number)
 	if (current == NULL)
 	{
 		fprintf(stderr, "L%d: can't pint, stack empty\n", line_number);
-		free_stack(*stack);
+		free_stack(stack);
 		exit(EXIT_FAILURE);
 	}
 	printf("%d\n", current->n);
@@ -47,7 +48,7 @@ void swap(stack_t **stack, unsigned int line_number)
 	if (*stack == NULL || (*stack)->next == NULL)
 	{
 		fprintf(stderr, "L%d: can't swap, stack too short\n", line_number);
-		free_stack(*stack);
+		free_stack(stack);
 		exit(EXIT_FAILURE);
 	}
 	(*stack) = (*stack)->next;
@@ -79,12 +80,12 @@ void pop(stack_t **stack, unsigned int line_number)
 	if (*stack == NULL)
 	{
 		fprintf(stderr, "L%d: can't pop an empty stack\n", line_number);
-		free_stack(*stack);
+		free_stack(stack);
 		exit(EXIT_FAILURE);
 	}
 	if ((*stack)->next == NULL)
 	{
-		free((*stack));
+		free(*stack);
 		*stack = NULL;
 		return;
 	}
