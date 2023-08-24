@@ -68,7 +68,10 @@ int is_comment(char *line)
 	while (line[i] != '\0')
 	{
 		if (isspace(line[i]))
+		{
 			i++;
+			continue;
+		}
 		else if (line[i] == '#')
 			return (1);
 		else
