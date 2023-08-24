@@ -14,6 +14,8 @@
  * struct info_s - struct holdes info about the program
  * @mode: program mode (stack, queue)
  * @LINE: line number
+ * @monty_file: monty file
+ * @splitted_line: line containing command
  *
  * Description: mode and line number
  */
@@ -63,7 +65,7 @@ void pop(stack_t **stack, unsigned int line_number);
 void swap(stack_t **stack, unsigned int line_number);
 void add(stack_t **stack, unsigned int line_number);
 void nop(stack_t **stack, unsigned int line_number);
-void free_2d();
+void free_2d(void);
 char *trim(char *command);
 int check_if_all_spaces(char *command);
 int is_comment(char *line);

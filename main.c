@@ -1,5 +1,5 @@
 #include "monty.h"
-struct info_s info = {"stack",NULL, NULL, 0};
+struct info_s info = {"stack", NULL, NULL, 0};
 /**
  * main - main function
  * @argv: arguments vector array

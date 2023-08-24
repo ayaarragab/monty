@@ -44,7 +44,7 @@ void swap(stack_t **stack, unsigned int line_number)
 
 	if (*stack == NULL || (*stack)->next == NULL)
 		_perror(stack, line_number, "can't swap, stack too short");
-	
+
 	second = (*stack)->next;
 	if (second->next)
 	{
@@ -79,7 +79,7 @@ void pop(stack_t **stack, unsigned int line_number)
 {
 	if (*stack == NULL)
 		_perror(stack, line_number, "can't pop an empty stack");
-	
+
 	if ((*stack)->next == NULL)
 	{
 		free(*stack);

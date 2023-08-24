@@ -24,7 +24,7 @@ void free_stack(stack_t **head)
  * free_2d - frees a 2d array
  * Return: nothing
 */
-void free_2d()
+void free_2d(void)
 {
 	int i;
 
