@@ -10,11 +10,8 @@ void add(stack_t **stack, unsigned int line_number)
 	int add;
 
 	if ((*stack) == NULL || (*stack)->next == NULL)
-	{
-		fprintf(stderr, "L%d: can't add, stack too short\n", line_number);
-		free_stack(stack);
-		exit(EXIT_FAILURE);
-	}
+		_perror(stack, line_number, "can't add, stack too short");
+
 	add = (*stack)->n + (*stack)->next->n;
 	(*stack) = (*stack)->next;
 	free((*stack)->prev);
@@ -32,11 +29,8 @@ void sub(stack_t **stack, unsigned int line_number)
 	int sub;
 
 	if ((*stack) == NULL || (*stack)->next == NULL)
-	{
-		fprintf(stderr, "L%d: can't sub, stack too short\n", line_number);
-		free_stack(stack);
-		exit(EXIT_FAILURE);
-	}
+		_perror(stack, line_number, "can't sub, stack too short");
+
 	sub = (*stack)->next->n - (*stack)->n;
 	(*stack) = (*stack)->next;
 	free((*stack)->prev);
@@ -54,11 +48,8 @@ void mul(stack_t **stack, unsigned int line_number)
 	int mul;
 
 	if ((*stack) == NULL || (*stack)->next == NULL)
-	{
-		fprintf(stderr, "L%d: can't mul, stack too short\n", line_number);
-		free_stack(stack);
-		exit(EXIT_FAILURE);
-	}
+		_perror(stack, line_number, "can't mul, stack too short");
+
 	mul = (*stack)->n * (*stack)->next->n;
 	(*stack) = (*stack)->next;
 	free((*stack)->prev);
@@ -76,17 +67,11 @@ void divi(stack_t **stack, unsigned int line_number)
 	int div;
 
 	if ((*stack) == NULL || (*stack)->next == NULL)
-	{
-		fprintf(stderr, "L%d: can't div, stack too short\n", line_number);
-		free_stack(stack);
-		exit(EXIT_FAILURE);
-	}
+		_perror(stack, line_number, "can't div, stack too short");
+
 	if ((*stack)->n == 0)
-	{
-		fprintf(stderr, "L%d: division by zero\n", line_number);
-		free_stack(stack);
-		exit(EXIT_FAILURE);
-	}
+		_perror(stack, line_number, "division by zero");
+
 	div = (*stack)->next->n / (*stack)->n;
 	(*stack) = (*stack)->next;
 	free((*stack)->prev);
@@ -104,17 +89,11 @@ void mod(stack_t **stack, unsigned int line_number)
 	int mod;
 
 	if ((*stack) == NULL || (*stack)->next == NULL)
-	{
-		fprintf(stderr, "L%d: can't mod, stack too short\n", line_number);
-		free_stack(stack);
-		exit(EXIT_FAILURE);
-	}
+		_perror(stack, line_number, "can't mod, stack too short");
+
 	if ((*stack)->n == 0)
-	{
-		fprintf(stderr, "L%d: division by zero\n", line_number);
-		free_stack(stack);
-		exit(EXIT_FAILURE);
-	}
+		_perror(stack, line_number, "division by zero");
+
 	mod = (*stack)->next->n % (*stack)->n;
 	(*stack) = (*stack)->next;
 	free((*stack)->prev);

@@ -63,11 +63,8 @@ void call_push(stack_t **stack, unsigned int L, char *num)
 	int number;
 
 	if (isnum(num) == 0)
-	{
-		fprintf(stderr, "L%d: usage: push integer\n", L);
-		free_stack(stack);
-		exit(EXIT_FAILURE);
-	}
+		_perror(stack, L, "usage: push integer");
+
 	number = atoi(num);
 	if (strcmp(info.mode, "stack") == 0)
 	{

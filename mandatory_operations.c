@@ -28,11 +28,8 @@ void pint(stack_t **stack, unsigned int line_number)
 	stack_t *current = *stack;
 
 	if (current == NULL)
-	{
-		fprintf(stderr, "L%d: can't pint, stack empty\n", line_number);
-		free_stack(stack);
-		exit(EXIT_FAILURE);
-	}
+		_perror(stack, line_number, "can't pint, stack empty");
+
 	printf("%d\n", current->n);
 }
 /**
@@ -46,14 +43,9 @@ void swap(stack_t **stack, unsigned int line_number)
 	stack_t *second;
 
 	if (*stack == NULL || (*stack)->next == NULL)
-	{
-		fprintf(stderr, "L%d: can't swap, stack too short\n", line_number);
-		free_stack(stack);
-		free_2d(&info.splitted_line);
-		exit(EXIT_FAILURE);
-	}
+		_perror(stack, line_number, "can't swap, stack too short");
+	
 	second = (*stack)->next;
-	second->prev = NULL;
 	if (second->next)
 	{
 		second->next->prev = (*stack);
@@ -63,6 +55,7 @@ void swap(stack_t **stack, unsigned int line_number)
 		(*stack)->next = NULL;
 	second->next = (*stack);
 	second->prev = NULL;
+	(*stack)->prev = second;
 	(*stack) = second;
 }
 /**
@@ -85,11 +78,8 @@ void nop(stack_t **stack, unsigned int line_number)
 void pop(stack_t **stack, unsigned int line_number)
 {
 	if (*stack == NULL)
-	{
-		fprintf(stderr, "L%d: can't pop an empty stack\n", line_number);
-		free_stack(stack);
-		exit(EXIT_FAILURE);
-	}
+		_perror(stack, line_number, "can't pop an empty stack");
+	
 	if ((*stack)->next == NULL)
 	{
 		free(*stack);

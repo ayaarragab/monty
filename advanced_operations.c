@@ -11,17 +11,11 @@ void pchar(stack_t **stack, unsigned int L)
 	int n;
 
 	if (top == NULL)
-	{
-		fprintf(stderr, "L%d: can't pchar, stack empty\n", L);
-		free_stack(stack);
-		exit(EXIT_FAILURE);
-	}
+		_perror(stack, L, "can't pchar, stack empty");
 	n = top->n;
 	if (n < 0 || n > 127)
 	{
-		fprintf(stderr, "L%d: can't pchar, value out of range\n", L);
-		free_stack(stack);
-		exit(EXIT_FAILURE);
+		_perror(stack, L, "can't pchar, value out of range");
 	}
 	printf("%c\n", (char)n);
 }

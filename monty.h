@@ -21,6 +21,7 @@ struct info_s
 {
 	char *mode;
 	char **splitted_line;
+	FILE *monty_file;
 	int LINE;
 };
 extern struct info_s info;
@@ -62,7 +63,7 @@ void pop(stack_t **stack, unsigned int line_number);
 void swap(stack_t **stack, unsigned int line_number);
 void add(stack_t **stack, unsigned int line_number);
 void nop(stack_t **stack, unsigned int line_number);
-void free_2d(char ***arr_2D);
+void free_2d();
 char *trim(char *command);
 int check_if_all_spaces(char *command);
 int is_comment(char *line);
@@ -78,8 +79,9 @@ void divi(stack_t **stack, unsigned int line_number);
 void mod(stack_t **stack, unsigned int line_number);
 void mul(stack_t **stack, unsigned int line_number);
 void sub(stack_t **stack, unsigned int line_number);
-void error_instruction(stack_t **stack, int line, char *instr, char ***buf);
+void error_instruction(stack_t **stack, int line, char *instr);
 void errno_argc(stack_t **stack);
 void errno_fd(char *str, stack_t **stack);
 char **make_array_of_strings(char *command);
+void _perror(stack_t **, unsigned int, char *);
 #endif /* MONTY_H */

@@ -7,11 +7,13 @@
  * @buf: buffer
  * Return: nothing
 */
-void error_instruction(stack_t **stack, int line, char *instr, char ***buf)
+void error_instruction(stack_t **stack, int line, char *instr)
 {
 	fprintf(stderr, "L%d: unknown instruction %s\n", line, instr);
-	free_2d(buf);
+	free_2d();
 	free_stack(stack);
+	if (info.monty_file)
+		fclose(info.monty_file);
 	exit(EXIT_FAILURE);
 }
 /**
@@ -23,6 +25,9 @@ void errno_argc(stack_t **stack)
 {
 	fprintf(stderr, "USAGE: monty file\n");
 	free_stack(stack);
+	free_2d();
+	if (info.monty_file)
+		fclose(info.monty_file);
 	exit(EXIT_FAILURE);
 }
 /**
@@ -35,6 +40,9 @@ void errno_fd(char *str, stack_t **stack)
 {
 	fprintf(stderr, "Error: Can't open file %s\n", str);
 	free_stack(stack);
+	free_2d();
+	if (info.monty_file)
+		fclose(info.monty_file);
 	exit(EXIT_FAILURE);
 }
 
@@ -73,4 +81,14 @@ char **make_array_of_strings(char *command)
 
 	tokens[num_tokns] = NULL;
 	return (tokens);
+}
+
+void _perror(stack_t **stack, unsigned int L, char *s)
+{
+	fprintf(stderr, "L%d: %s\n", L, s);
+	free_stack(stack);
+	free_2d();
+	if (info.monty_file)
+		free(info.monty_file);
+	exit(EXIT_FAILURE);
 }

@@ -1,5 +1,5 @@
 #include "monty.h"
-struct info_s info = {"stack",NULL, 0};
+struct info_s info = {"stack",NULL, NULL, 0};
 /**
  * main - main function
  * @argv: arguments vector array
@@ -11,15 +11,14 @@ int main(int argc, char *argv[])
 	stack_t *stack = NULL;
 	char *trimmed;
 	char buffer[8192], *filename = argv[1];
-	FILE *monty_file;
 	void (*opcode)(stack_t **, unsigned int);
 
 	if (argc != 2)
 		errno_argc(&stack);
-	monty_file = fopen(filename, "r");
-	if (monty_file == NULL)
+	info.monty_file = fopen(filename, "r");
+	if (info.monty_file == NULL)
 		errno_fd(filename, &stack);
-	while (fgets(buffer, 8192, monty_file) != NULL)
+	while (fgets(buffer, 8192, info.monty_file) != NULL)
 	{
 		info.LINE++;
 		if (buffer[0] == '\n' || !check_if_all_spaces(buffer) || is_comment(buffer))
@@ -32,14 +31,14 @@ int main(int argc, char *argv[])
 			if (strcmp(info.splitted_line[0], "push") == 0)
 				call_push(&stack, info.LINE, info.splitted_line[1]);
 			else
-				error_instruction(&stack, info.LINE, info.splitted_line[0], &info.splitted_line);
+				error_instruction(&stack, info.LINE, info.splitted_line[0]);
 		}
 		else
 			opcode(&stack, info.LINE);
-		free_2d(&info.splitted_line);
+		free_2d();
 	}
-	fclose(monty_file);
-	free_2d(&info.splitted_line);
+	fclose(info.monty_file);
+	free_2d();
 	free_stack(&stack);
 	return (0);
 }

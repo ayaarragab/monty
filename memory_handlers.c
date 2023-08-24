@@ -22,22 +22,21 @@ void free_stack(stack_t **head)
 }
 /**
  * free_2d - frees a 2d array
- * @arr_2D: 2d arr
  * Return: nothing
 */
-void free_2d(char ***arr_2D)
+void free_2d()
 {
 	int i;
 
-	if (*arr_2D == NULL)
+	if (info.splitted_line == NULL)
 		return;
-	for (i = 0; (*arr_2D)[i] != NULL; i++)
+	for (i = 0; info.splitted_line[i] != NULL; i++)
 	{
-		free((*arr_2D)[i]);
-		(*arr_2D)[i] = NULL;
+		free(info.splitted_line[i]);
+		info.splitted_line[i] = NULL;
 	}
-	free(*arr_2D);
-	*arr_2D = NULL;
+	free(info.splitted_line);
+	info.splitted_line = NULL;
 }
 
 /**
@@ -50,6 +49,9 @@ void check_malloc(stack_t *stack)
 	if (stack == NULL)
 	{
 		fprintf(stderr, "Error: malloc failed\n");
-	exit(EXIT_FAILURE);
+		free_2d();
+		if (info.monty_file)
+			fclose(info.monty_file);
+		exit(EXIT_FAILURE);
 	}
 }
