@@ -21,7 +21,7 @@ void (*is_opcode(char *cmd))(stack_t **stack, unsigned int L)
 		{"stack", stack},
 		{"queue", queue},
 		{"sub", sub},
-		{"divi", divi},
+		{"div", divi},
 		{"mod", mod},
 		{"mul", mul},
 		{NULL, NULL},
